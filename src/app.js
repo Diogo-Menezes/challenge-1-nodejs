@@ -73,12 +73,9 @@ app.post('/repositories/:id/like', (request, response) => {
       .status(400)
       .send({ error: `Couldn't find project with this id: ${id}` });
   }
+  const repo = repositories[repoIndex];
+  repo.likes += 1;
 
-  const likes = repositories[repoIndex].likes + 1;
-
-  const repo = { ...repositories[repoIndex], likes };
-
-  repositories[repoIndex] = repo;
   return response.json(repo);
 });
 
